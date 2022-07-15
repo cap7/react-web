@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
-import {persistReducer} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { persistReducer, purgeStoredState } from "redux-persist"
+import storage from "redux-persist/lib/storage"
 import {
   logInUseCase,
   listClientUseCase,
@@ -14,19 +14,20 @@ import {
   saveWeightHeightUseCase,
   updateVitalSignsUseCase,
   updateWeightHeightUseCase,
-  takeOrderUseCase
+  takeOrderUseCase,
+  signOutUseCase,
 } from "../useCases"
 
 const basePersistConfig = {
   version: 1,
   storage,
-  blacklist: []
+  blacklist: [],
 }
 
 const authPersistConfig = {
   ...basePersistConfig,
-  key: 'auth',
-  blacklist: ['error', 'isLoading']
+  key: "auth",
+  blacklist: ["error", "isLoading"],
 }
 
 const auth = persistReducer(authPersistConfig, logInUseCase.reducer)
@@ -40,9 +41,10 @@ export default combineReducers({
   listResult: listResultUseCase.reducer,
   takeOrderListMenu: takeOrderUseCase.reducer,
   listVitalSigns: listVitalSignsUseCase.reducer,
-  listWeightHeight:listWeightHeightUseCase.reducer,
+  listWeightHeight: listWeightHeightUseCase.reducer,
   saveVitalSigns: saveVitalSignsUseCase.reducer,
   saveWeightHeight: saveWeightHeightUseCase.reducer,
   updateVitalSigns: updateVitalSignsUseCase.reducer,
   updateWeightHeight: updateWeightHeightUseCase.reducer,
+  signOut: signOutUseCase.reducer,
 })

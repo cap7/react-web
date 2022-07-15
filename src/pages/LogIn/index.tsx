@@ -28,6 +28,7 @@ const LoginViewController: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (isLoggedIn) {
+      console.log("auth",data.codigo)
       dispatchContext({
         type: ContextTypes.auth,
         access: true,

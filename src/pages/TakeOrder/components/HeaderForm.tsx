@@ -22,7 +22,7 @@ const HeaderForm: React.FC<Props> = (props) => {
           <div className="basis-1/2">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               value={patient}
               disabled
             />
@@ -36,7 +36,7 @@ const HeaderForm: React.FC<Props> = (props) => {
           <div className="basis-1/2">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               value={age}
               disabled
             />
@@ -50,7 +50,7 @@ const HeaderForm: React.FC<Props> = (props) => {
           <div className="basis-1/2">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               value={order}
               disabled
             />
@@ -64,7 +64,7 @@ const HeaderForm: React.FC<Props> = (props) => {
           <div className="basis-1/2">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               value={ocupation}
               disabled
             />
@@ -78,7 +78,7 @@ const HeaderForm: React.FC<Props> = (props) => {
           <div className="basis-1/2">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               value={evaluation}
               disabled
             />
@@ -92,7 +92,7 @@ const HeaderForm: React.FC<Props> = (props) => {
           <div className="basis-1/2">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               value={plan}
               disabled
             />

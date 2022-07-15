@@ -41,7 +41,7 @@ interface Props {
   saveWeightHeight: any
   updateVitalSigns: any
   updateWeightHeight: any
-  user: string
+  user:any
 }
 
 const TakeOrderViewController: React.FC<Props> = (props) => {
@@ -54,7 +54,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
     saveWeightHeight,
     updateVitalSigns,
     updateWeightHeight,
-    user,
+    user
   } = props
   const { stateContext, dispatchContext } = useContext(MainContext)
   const [stateSelectForm, setStateSelectForm] = useState<string>("")
@@ -112,7 +112,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
           waistHip,
           nutritionalDiagnosis,
           observations,
-          user
+          user.codigo
         )
       )
     } else {
@@ -131,7 +131,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
           waistHip,
           nutritionalDiagnosis,
           observations,
-          user
+          user.codigo
         )
       )
     }
@@ -166,6 +166,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
     saturation: string,
     observations: string
   ) => {
+    console.log(stateContext)
     setStateFormSave(false)
     if (stateFormEdit) {
       setStateFormEdit(false)
@@ -184,7 +185,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
           heartRate,
           saturation,
           observations,
-          user
+          user.codigo
         )
       )
     } else {
@@ -202,7 +203,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
           heartRate,
           saturation,
           observations,
-          user
+          user.codigo
         )
       )
     }
@@ -411,22 +412,18 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
 
   const callbackMessage = useCallback(() => {
     if (saveVitalSigns) {
-      console.log("saveVitalSigns")
       return messageSaveVitalSigns()
     }
 
     if (updateVitalSigns) {
-      console.log("updateVitalSigns")
       return messageUpdateVitalSigns()
     }
 
     if (saveWeightHeight) {
-      console.log("saveWeightHeight")
       return messageSaveWeightHeight()
     }
 
     if (updateWeightHeight) {
-      console.log("updateWeightHeight")
       return messageUpdateWeightHeight()
     }
   }, [saveVitalSigns, updateVitalSigns, saveWeightHeight, updateWeightHeight])
@@ -458,7 +455,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className=" bg-white rounded-lg overflow-hidden shadow-xl transition-all px-2 pt-5 pb-4  mx-20 w-screen">
+              <Dialog.Panel className="relative bg-white rounded-lg overflow-hidden shadow-xl transition-all px-2 pt-5 pb-4  mx-20 w-screen">
                 <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                   <button
                     type="button"
@@ -510,7 +507,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
 
 function mapStateToProps(state: any) {
   return {
-    user: state.auth.data.codigo,
+    user: state.auth.data,
     listMenu: state.takeOrderListMenu.data,
     listVitalSigns: state.listVitalSigns.data,
     listWeightHeight: state.listWeightHeight.data,

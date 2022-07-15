@@ -72,7 +72,11 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ")
 }
 
-const SidebarNav: React.FC = () => {
+type Props = {
+  onSignOut?: () => void
+}
+
+const SidebarNav: React.FC<Props> = ({ onSignOut }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -139,23 +143,7 @@ const SidebarNav: React.FC = () => {
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2">
-                    <div className="space-y-1">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                            "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
-                    
+                    <div className="space-y-1"></div>
                   </nav>
                 </div>
               </Dialog.Panel>
@@ -212,57 +200,7 @@ const SidebarNav: React.FC = () => {
               leaveTo="transform opacity-0 scale-95"
             >
               <Menu.Items className="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
-                <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}
-                      >
-                        Ver perfil
-                      </a>
-                    )}
-                  </Menu.Item>
-
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}
-                      >
-                        Notificaciones
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}
-                      >
-                        Soporte
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="py-1">
+                <div className="py-1" onClick={onSignOut}>
                   <Menu.Item>
                     {({ active }) => (
                       <a
@@ -285,22 +223,7 @@ const SidebarNav: React.FC = () => {
 
           {/* Navigation */}
           <nav className="px-3 mt-6">
-            <div className="space-y-1">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-200 text-gray-900"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
+            <div className="space-y-1"></div>
           </nav>
         </div>
       </div>

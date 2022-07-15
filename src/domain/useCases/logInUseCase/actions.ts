@@ -6,7 +6,8 @@ const { Types, Creators } = createActions({
   // Reducer
   logInRequest: null,
   logInSuccess: null,
-  logInFailure: ["error"]
+  logInFailure: ["error"],
+  logInClean: null
 })
 
 export { Creators, Types }

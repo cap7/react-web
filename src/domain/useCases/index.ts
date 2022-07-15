@@ -11,6 +11,7 @@ import * as saveWeightHeightUseCase from "./saveWeightHeightUseCase"
 import * as updateVitalSignsUseCase from "./updateVitalSignsUseCase"
 import * as updateWeightHeightUseCase from "./updateWeightHeightUseCase"
 import * as takeOrderUseCase from "./takeOrderUseCase"
+import * as signOutUseCase from "./signOutUseCase"
 
 export {
   logInUseCase,
@@ -25,5 +26,6 @@ export {
   saveWeightHeightUseCase,
   updateVitalSignsUseCase,
   updateWeightHeightUseCase,
-  takeOrderUseCase
+  takeOrderUseCase,
+  signOutUseCase
 }

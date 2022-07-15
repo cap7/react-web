@@ -16,6 +16,7 @@ import { Creators as actionListEvaluation } from "../../domain/useCases/listEval
 import { Creators as actionListInvoice } from "../../domain/useCases/listInvoiceUseCase"
 import { Creators as actionListOrder } from "../../domain/useCases/listOrderUseCase"
 import { Creators as actionTakeOrder } from "../../domain/useCases/takeOrderUseCase"
+import { Creators as actionSignOut } from "../../domain/useCases/signOutUseCase"
 import { useForm, SubmitHandler } from "react-hook-form"
 import Helpers from "../../core/Helper"
 
@@ -31,6 +32,7 @@ interface Props {
   invoices: any
   invoicesIsLoading: boolean
   ordersDataTable: any
+  signOut: boolean
 }
 
 enum SelectMenuType {
@@ -77,6 +79,7 @@ const HomeViewController: React.FC<Props> = (props) => {
     invoices,
     invoicesIsLoading,
     ordersDataTable,
+    signOut,
   } = props
   const navigate = useNavigate()
   const [stateListResult, setStateListResult] = useState<any>()
@@ -91,7 +94,7 @@ const HomeViewController: React.FC<Props> = (props) => {
   const [stateEvaluation, setStateEvaluation] = useState<string>("")
   const [stateInvoice, setStateInvoice] = useState<string>("")
   const [stateOrdersDataTable, setStateOrdersDataTable] = useState<any>()
-  const [stateTakeOrder, setStateTakeOrder] = useState<boolean>(false)
+  const [stateShowTakeOrder, setStateShowTakeOrder] = useState<boolean>(false)
   const { stateContext, dispatchContext } = useContext(MainContext)
 
   useEffect(() => {
@@ -158,6 +161,18 @@ const HomeViewController: React.FC<Props> = (props) => {
     ordersDataTable != null && setStateOrdersDataTable(ordersDataTable)
   }, [ordersDataTable])
 
+  useEffect(() => {
+    if (signOut) {
+      dispatchContext({
+        type: ContextTypes.auth,
+        access: false,
+        codigo: "",
+        nombre: "",
+      })
+      navigate("/LogIn")
+    }
+  }, [signOut])
+
   const onSelectMenuItem = (item: string, selectMenu: string) => {
     switch (selectMenu) {
       case SelectMenuType.results:
@@ -193,13 +208,15 @@ const HomeViewController: React.FC<Props> = (props) => {
     )
   }
 
-  const onClickTakeOrder = (codOrder: string,
-    vorderVal:string,
+  const onClickTakeOrder = (
+    codOrder: string,
+    vorderVal: string,
     vpatient: string,
     vage: string,
     vocupation: string,
     vplan: string,
-    vevaluation: string) => {
+    vevaluation: string
+  ) => {
     dispatch(actionTakeOrder.listMenu(true, codOrder))
     dispatchContext({
       type: ContextTypes.takeOrder,
@@ -214,10 +231,14 @@ const HomeViewController: React.FC<Props> = (props) => {
     })
   }
 
+  const onSignOut = () => {
+    dispatch(actionSignOut.signOut())
+  }
+
   return (
     <div className="min-h-full">
       <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100">
-        <SidebarNav />
+        <SidebarNav onSignOut={onSignOut} />
       </div>
       <div className="lg:pl-64 flex flex-col">
         <main className="flex-1">
@@ -401,7 +422,7 @@ const HomeViewController: React.FC<Props> = (props) => {
           />
         </main>
       </div>
-      <TakeOrder />
+      {stateContext.takeOrder.show && <TakeOrder />}
     </div>
   )
 }
@@ -419,6 +440,7 @@ function mapStateToProps(state: any) {
     invoicesIsLoading: state.listInvoice.isLoading,
     orders: state.listOrder.data,
     ordersDataTable: state.listOrder.dataTable,
+    signOut: state.signOut.isLoggedIn,
   }
 }
 

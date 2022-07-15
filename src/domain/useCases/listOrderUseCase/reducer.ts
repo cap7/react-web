@@ -3,14 +3,15 @@ import { Types } from "./actions"
 
 const INITIAL_STATE = {
   data: null,
-  isLoading: false,
   dataTable:null,
+  isLoading: false,
   error: null,
 }
 
 const request = (state: any) => ({
   ...state,
   data: null,
+  dataTable:null,
   isLoading: true,
   error: null,
 })
@@ -26,6 +27,7 @@ const success = (state: any, action: any) => ({
 const failure = (state: any, action: any) => ({
   ...state,
   data: null,
+  dataTable:null,
   isLoading: false,
   error: action.error,
 })

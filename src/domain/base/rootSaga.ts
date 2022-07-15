@@ -14,6 +14,7 @@ import {
   updateVitalSignsUseCase,
   updateWeightHeightUseCase,
   takeOrderUseCase,
+  signOutUseCase
 } from "../useCases"
 
 export default function* rootSaga() {
@@ -66,4 +67,8 @@ export default function* rootSaga() {
     updateWeightHeightUseCase.Types.UPDATE_WEIGHT_HEIGHT,
     updateWeightHeightUseCase.saga
   )
+
+  yield takeLatest(signOutUseCase.Types.SIGN_OUT, 
+    signOutUseCase.saga)
+    
 }

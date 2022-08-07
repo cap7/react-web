@@ -20,10 +20,11 @@ import {
 } from "@heroicons/react/solid"
 import Config from "Config"
 import HeaderForm from "./components/HeaderForm"
-import VitalSigns from "./components/VitalSigns"
-import WeightHeight from "./components/WeightHeight"
+import VitalSigns from "./forms/VitalSigns"
+import WeightHeight from "./forms/WeightHeight"
 import ButtonForm from "./components/ButtonForm"
 import MessageForm from "./components/Message"
+import MenuForm from "./components/MenuForm"
 import { Creators as actionSaveWeightHeight } from "../../domain/useCases/saveWeightHeightUseCase"
 import { Creators as actionUpdateWeightHeight } from "../../domain/useCases/updateWeightHeightUseCase"
 import { Creators as actionListWeightHeight } from "../../domain/useCases/listWeightHeightUseCase"
@@ -215,85 +216,8 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
     )
   }
 
-  const takeOrderListMenuChild = (submenu: any) => {
-    return (
-      <ul role="list" className="">
-        {submenu.map((value: any, key: number) => (
-          <li key={key}>
-            <div className="relative pb-8">
-              {key !== submenu.length - 1 ? (
-                <span
-                  className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
-                  aria-hidden="true"
-                />
-              ) : null}
-              <div
-                className="relative flex space-x-3 "
-                onClick={() => setStateSelectForm(value.codigo)}
-              >
-                <div>
-                  <span
-                    className={`${
-                      value.estado === "1" ? `bg-green-400` : `bg-red-400`
-                    } h-8 w-8 rounded-full flex items-center justify-center`}
-                  >
-                    {value.estado === "1" ? (
-                      <CheckIcon
-                        className="h-5 w-5 text-white"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <XIcon
-                        className="h-5 w-5 text-white"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </span>
-                </div>
-                <div className="flex flex-1 min-w-0 place-items-center ">
-                  <label
-                    className={`${
-                      stateSelectForm === value.codigo
-                        ? `font-bold underline underline-offset-4 decoration-2 decoration-indigo-600`
-                        : `font-normal`
-                    } text-sm text-gray-500 text-justify`}
-                  >
-                    {value.analisis}
-                  </label>
-                </div>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    )
-  }
-
-  const takeOrderListMenuHead = () => {
-    return (
-      <Fragment>
-        {listMenu &&
-          listMenu.map((value: any, key: number) => (
-            <Fragment key={key}>
-              <div className="flow-root px-2 w-64">
-                <div className="flex py-2 place-items-center ">
-                  <div className="flex w-full justify-start  ">
-                    <label className="text-sm  text-gray-500">
-                      {value.seccion}
-                    </label>
-                  </div>
-                  <PlusIcon
-                    className="h-4 w-4 text-gray-500  "
-                    aria-hidden="true"
-                  />
-                </div>
-                <div className="w-full border-t  border-gray-300 mb-4" />
-                {takeOrderListMenuChild(value.detalle)}
-              </div>
-            </Fragment>
-          ))}
-      </Fragment>
-    )
+  const selectFormFromMenu = (codForm:string) => {
+    setStateSelectForm(codForm)
   }
 
   const onClickNew = () => {
@@ -476,7 +400,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
                     evaluation={stateContext.takeOrder.evaluation}
                   />
                   <div className="flex flex-row ">
-                    <div>{takeOrderListMenuHead()}</div>
+                    <MenuForm listMenu={listMenu} selectForm={selectFormFromMenu} stateSelectForm={stateSelectForm}/>
                     <div className="flex-auto bg-gray-100 px-8 py-6">
                       <div className="flex flex-row">
                         <div className="flex-auto">

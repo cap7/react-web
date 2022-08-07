@@ -1,6 +1,10 @@
 import React, { Fragment } from "react"
+import { Disclosure } from "@headlessui/react"
 import { Button, Table } from "../../../components"
-import { ChevronDoubleDownIcon } from "@heroicons/react/solid"
+import {
+  ChevronDoubleDownIcon,
+  ChevronDoubleUpIcon,
+} from "@heroicons/react/solid"
 
 const columsDatil = ["Código", "Procedimiento", "Estado", "Fecha resultado"]
 
@@ -64,16 +68,24 @@ const rowTable = (
   ) => void,
   age: string,
   ocupation: string,
-  plan: string
+  plan: string,
+  open: boolean
 ) => {
   return (
-    <div className="grid grid-flow-col justify-center gap-2 py-2 bg-white border-gray-300 border-t">
+    <div className="flex grid grid-flow-col justify-center gap-2 py-2 bg-white border-gray-300 border-t">
       <div className="flex justify-center ">
         <button type="submit">
-          <ChevronDoubleDownIcon
-            className="h-5 w-5  text-indigo-500 "
-            aria-hidden="true"
-          />
+          {open ? (
+            <ChevronDoubleUpIcon
+              className="h-5 w-5  text-indigo-500 "
+              aria-hidden="true"
+            />
+          ) : (
+            <ChevronDoubleDownIcon
+              className="h-5 w-5  text-indigo-500 "
+              aria-hidden="true"
+            />
+          )}
         </button>
       </div>
       <div className="w-48 flex place-items-center justify-center">
@@ -99,7 +111,17 @@ const rowTable = (
           name={`btn-atender-order`}
           text="Atender"
           sm
-          onClick={() => onClickTakeOrder(codOrder, order, patient, age, ocupation, plan, evaluation)}
+          onClick={() =>
+            onClickTakeOrder(
+              codOrder,
+              order,
+              patient,
+              age,
+              ocupation,
+              plan,
+              evaluation
+            )
+          }
         />
       </div>
     </div>
@@ -145,21 +167,30 @@ const bodyTable = (
       {data ? (
         <Fragment>
           {data.map((value: any, key: number) => (
-            <Fragment key={key}>
-              {rowTable(
-                value[0],
-                value[1],
-                value[2],
-                value[3],
-                value[4],
-                value[6],
-                onClickTakeOrder,
-                value[8],
-                value[7],
-                value[9]
+            <Disclosure as="div" key={key}>
+              {({ open }) => (
+                <Fragment key={key}>
+                  <Disclosure.Button className="w-full">
+                    <div>
+                      {rowTable(
+                        value[0],
+                        value[1],
+                        value[2],
+                        value[3],
+                        value[4],
+                        value[6],
+                        onClickTakeOrder,
+                        value[8],
+                        value[7],
+                        value[9],
+                        open
+                      )}
+                    </div>
+                  </Disclosure.Button>
+                  <Disclosure.Panel>{tableDetail(value[5])}</Disclosure.Panel>
+                </Fragment>
               )}
-              {tableDetail(value[5])}
-            </Fragment>
+            </Disclosure>
           ))}
         </Fragment>
       ) : (

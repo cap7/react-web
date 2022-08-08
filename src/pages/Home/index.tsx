@@ -102,7 +102,7 @@ const HomeViewController: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/LogIn")
+      navigate("/LogIn/")
     }
   }, [])
 

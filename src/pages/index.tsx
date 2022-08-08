@@ -18,7 +18,7 @@ const Root: React.FC = () => {
           <MainProvider>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/LogIn" element={<LogIn />} />
+              <Route path="/LogIn/" element={<LogIn />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </MainProvider>

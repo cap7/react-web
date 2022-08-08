@@ -1,7 +1,7 @@
 import { AxiosService } from "./client/AxiosHttpClient"
 import { HttpMethod } from "./client/Http.interface"
 import VitalSignsDataStore from "../VitalSignsDataStore"
-
+import Config from "Config"
 export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
   private axiosClient = AxiosService.getInstance()
 
@@ -20,8 +20,8 @@ export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
     codUser: string
   ) {
     try {
-      const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/GuardarSignosVitales",
+      const response:any = await this.axiosClient.exchange<any>(
+        `${Config.url_api}/GuardarSignosVitales`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -40,7 +40,7 @@ export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
           }),
         }
       )
-      return response
+      return response[0]
     } catch (error) {
       throw new Error("No Data")
     }
@@ -61,8 +61,8 @@ export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
     codUser: string
   ) {
     try {
-      const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/ActualizarSignosVitales",
+      const response:any = await this.axiosClient.exchange<any>(
+        `${Config.url_api}/ActualizarSignosVitales`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -81,7 +81,7 @@ export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
           }),
         }
       )
-      return response
+      return response[0]
     } catch (error) {
       throw new Error("No Data")
     }
@@ -89,8 +89,8 @@ export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
 
   async listVitalSigns(codOrder: string) {
     try {
-      const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/ListarSignosVitales",
+      const response:any = await this.axiosClient.exchange<any>(
+        `${Config.url_api}/ListarSignosVitales`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -98,7 +98,7 @@ export default class VitalSignsDataStoreApi implements VitalSignsDataStore {
           }),
         }
       )
-      return response
+      return response[0]
     } catch (error) {
       throw new Error("No Data")
     }

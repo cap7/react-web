@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   data:null,
   isLoggedIn: false,
   isLoading: false,
-  error: null,
+  errorMessage: null,
+  error: false
 }
 
 const request = (state: any) => ({
@@ -13,7 +14,8 @@ const request = (state: any) => ({
   data:null,
   isLoggedIn: false,
   isLoading: true,
-  error: null,
+  errorMessage: null,
+  error: false
 })
 
 const success = (state: any, action: any) => ({
@@ -21,7 +23,8 @@ const success = (state: any, action: any) => ({
   data: action.data,
   isLoggedIn: true,
   isLoading: false,
-  error: null,
+  errorMessage: null,
+  error: false
 })
 
 const failure = (state: any, action: any) => ({
@@ -29,7 +32,8 @@ const failure = (state: any, action: any) => ({
   data:null,
   isLoggedIn: false,
   isLoading: false,
-  error: action.error,
+  errorMessage: action.errorMessage,
+  error: action.error
 })
 
 const clean = () => INITIAL_STATE;

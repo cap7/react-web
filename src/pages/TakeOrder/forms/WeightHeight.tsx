@@ -150,7 +150,7 @@ const WeightHeight: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateSize}
-              onChange={(e) => setStateSize(e.target.value)}
+              onChange={(e) => setStateSize(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -168,7 +168,7 @@ const WeightHeight: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateWeight}
-              onChange={(e) => setStateWeight(e.target.value)}
+              onChange={(e) => setStateWeight(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -184,7 +184,7 @@ const WeightHeight: React.FC<Props> = (props) => {
               type="text"
               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md bg-gray-100"
               value={stateImc}
-              onChange={(e) => setStateImc(e.target.value)}
+              onChange={(e) => setStateImc(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={true}
             />
           </div>
@@ -220,7 +220,7 @@ const WeightHeight: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateWaist}
-              onChange={(e) => setStateWaist(e.target.value)}
+              onChange={(e) => setStateWaist(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -238,7 +238,7 @@ const WeightHeight: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateHip}
-              onChange={(e) => setStateHip(e.target.value)}
+              onChange={(e) => setStateHip(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -254,7 +254,7 @@ const WeightHeight: React.FC<Props> = (props) => {
               type="text"
               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md bg-gray-100"
               value={stateWaistHip}
-              onChange={(e) => setStateWaistHip(e.target.value)}
+              onChange={(e) => setStateWaistHip(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={true}
             />
           </div>
@@ -286,7 +286,7 @@ const WeightHeight: React.FC<Props> = (props) => {
               }`}
               value={stateChestPerimeterInspiration}
               onChange={(e) =>
-                setStateChestPerimeterInspiration(e.target.value)
+                setStateChestPerimeterInspiration(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))
               }
               disabled={formDisabled}
             />
@@ -305,7 +305,7 @@ const WeightHeight: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateChestPerimeterExpiration}
-              onChange={(e) => setStateChestPerimeterExpiration(e.target.value)}
+              onChange={(e) => setStateChestPerimeterExpiration(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>

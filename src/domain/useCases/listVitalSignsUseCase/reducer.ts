@@ -28,8 +28,11 @@ const failure = (state: any, action: any) => ({
   error: action.error,
 })
 
+const clear = () => INITIAL_STATE;
+
 export default createReducer(INITIAL_STATE, {
   [Types.LIST_VITAL_SIGNS_REQUEST]: request,
   [Types.LIST_VITAL_SIGNS_SUCCESS]: success,
-  [Types.LIST_VITAL_SIGNS_FAILURE]: failure
+  [Types.LIST_VITAL_SIGNS_FAILURE]: failure,
+  [Types.LIST_VITAL_SIGNS_CLEAR]: clear
 })

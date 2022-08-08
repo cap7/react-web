@@ -1,6 +1,4 @@
 import React, { Fragment } from "react"
-import Button from "./Button"
-import { ChevronDoubleDownIcon } from "@heroicons/react/solid"
 
 type Props = {
   id: string

@@ -7,6 +7,7 @@ export const MainReducer = (state: any, action: any) => {
   switch (action.type) {
     case "AUTH":
       return {
+        ...state,
         access: action.access,
         codigo: action.codigo,
         flag: action.flag,
@@ -15,6 +16,7 @@ export const MainReducer = (state: any, action: any) => {
       }
     case "TAKE_ORDER":
       return {
+        ...state,
           show: action.show,
           order: action.order,
           orderVal: action.orderVal,
@@ -25,6 +27,6 @@ export const MainReducer = (state: any, action: any) => {
           evaluation: action.evaluation 
       }
     default:
-      return state
+      throw new Error(`Unknown action type: ${action.type}`);
   }
 }

@@ -1,7 +1,7 @@
 import { AxiosService } from "./client/AxiosHttpClient"
 import { HttpMethod } from "./client/Http.interface"
 import WeightHeightDataStore from "../WeightHeightDataStore"
-
+import Config from "Config"
 export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
   private axiosClient = AxiosService.getInstance()
 
@@ -21,8 +21,8 @@ export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
     codUser: string
   ) {
     try {
-      const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/GuardarPesoTalla",
+      const response:any = await this.axiosClient.exchange<any>(
+        `${Config.url_api}/GuardarPesoTalla`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -42,7 +42,7 @@ export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
           }),
         }
       )
-      return response
+      return response[0]
     } catch (error) {
       throw new Error("No Data")
     }
@@ -64,8 +64,8 @@ export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
     codUser: string
   ) {
     try {
-      const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/ActualizarPesoTalla",
+      const response:any = await this.axiosClient.exchange<any>(
+        `${Config.url_api}/ActualizarPesoTalla`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -85,7 +85,7 @@ export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
           }),
         }
       )
-      return response
+      return response[0]
     } catch (error) {
       throw new Error("No Data")
     }
@@ -93,8 +93,8 @@ export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
 
   async listWeightHeight(codOrder: string) {
     try {
-      const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/ListarPesoTalla",
+      const response:any = await this.axiosClient.exchange<any>(
+        `${Config.url_api}/ListarPesoTalla`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -102,7 +102,7 @@ export default class WeightHeightDataStoreApi implements WeightHeightDataStore {
           }),
         }
       )
-      return response
+      return response[0]
     } catch (error) {
       throw new Error("No Data")
     }

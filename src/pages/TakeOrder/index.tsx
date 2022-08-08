@@ -10,14 +10,7 @@ import { Dispatch } from "redux"
 import { MainContext } from "../../context/MainProvider"
 import { ContextTypes } from "../../context/MainReducer"
 import { Dialog, Transition } from "@headlessui/react"
-import { SidebarNav, Input, SelectMenu, Button, Table } from "../../components"
-import {
-  CheckIcon,
-  ThumbUpIcon,
-  UserIcon,
-  PlusIcon,
-  XIcon,
-} from "@heroicons/react/solid"
+import { XIcon } from "@heroicons/react/solid"
 import Config from "Config"
 import HeaderForm from "./components/HeaderForm"
 import VitalSigns from "./forms/VitalSigns"
@@ -25,47 +18,48 @@ import WeightHeight from "./forms/WeightHeight"
 import ButtonForm from "./components/ButtonForm"
 import MessageForm from "./components/Message"
 import MenuForm from "./components/MenuForm"
+import { Spinner } from "../../components"
 import { Creators as actionSaveWeightHeight } from "../../domain/useCases/saveWeightHeightUseCase"
 import { Creators as actionUpdateWeightHeight } from "../../domain/useCases/updateWeightHeightUseCase"
 import { Creators as actionListWeightHeight } from "../../domain/useCases/listWeightHeightUseCase"
 import { Creators as actionSaveVitalSigs } from "../../domain/useCases/saveVitalSignsUseCase"
 import { Creators as actionUpdateVitalSigs } from "../../domain/useCases/updateVitalSignsUseCase"
 import { Creators as actionListVitalSigs } from "../../domain/useCases/listVitalSignsUseCase"
-import { Creators as actionTakeOrder } from "../../domain/useCases/takeOrderUseCase"
 
 interface Props {
   dispatch: Dispatch
   listMenu: any
+  isLoadingListMenu: boolean
   listVitalSigns: any
   listWeightHeight: any
   saveVitalSigns: any
   saveWeightHeight: any
   updateVitalSigns: any
   updateWeightHeight: any
-  user:any
+  user: any
 }
 
 const TakeOrderViewController: React.FC<Props> = (props) => {
   const {
     dispatch,
     listMenu,
+    isLoadingListMenu,
     listVitalSigns,
     listWeightHeight,
     saveVitalSigns,
     saveWeightHeight,
     updateVitalSigns,
     updateWeightHeight,
-    user
+    user,
   } = props
   const { stateContext, dispatchContext } = useContext(MainContext)
-  const [stateSelectForm, setStateSelectForm] = useState<string>("")
+  const [stateSelectForm, setStateSelectForm] = useState<string>("NO_SELECT")
   const [stateVitalSigns, setStateVitalSigns] = useState<any>(null)
   const [stateWeightHeight, setStateWeightHeight] = useState<any>(null)
   const [stateFormDisabled, setStateFormDisabled] = useState<boolean>(true)
   const [stateFormClean, setStateFormClean] = useState<boolean>(false)
   const [stateFormSave, setStateFormSave] = useState<boolean>(false)
   const [stateFormEdit, setStateFormEdit] = useState<boolean>(false)
-  const [stateForm, setStateForm] = useState<boolean>(true)
   const [stateDisabledNew, setStateDisabledNew] = useState<boolean>(true)
   const [stateDisabledSave, setStateDisabledSave] = useState<boolean>(true)
   const [stateDisabledEdit, setStateDisabledEdit] = useState<boolean>(true)
@@ -79,8 +73,10 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
   const onClear = () => {
     dispatch(actionSaveVitalSigs.saveVitalSignsClear())
     dispatch(actionUpdateVitalSigs.updateVitalSignsClear())
+    dispatch(actionListVitalSigs.listVitalSignsClear())
     dispatch(actionSaveWeightHeight.saveWeightHeightClear())
     dispatch(actionUpdateWeightHeight.updateWeightHeightClear())
+    dispatch(actionListWeightHeight.listWeightHeightClear())
   }
 
   const onSaveWeightHeight = (
@@ -147,7 +143,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
     )
   }
 
-  const setTakeOrderContext = () => {
+  const onCloseTakeOrder = () => {
     onClear()
     setStateSelectForm("")
     dispatchContext({
@@ -167,7 +163,6 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
     saturation: string,
     observations: string
   ) => {
-    console.log(stateContext)
     setStateFormSave(false)
     if (stateFormEdit) {
       setStateFormEdit(false)
@@ -216,7 +211,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
     )
   }
 
-  const selectFormFromMenu = (codForm:string) => {
+  const selectFormFromMenu = (codForm: string) => {
     setStateSelectForm(codForm)
   }
 
@@ -278,8 +273,12 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
   }
 
   useEffect(() => {
-    onListVitalSigns()
-    onListWeightHeight()
+    if (listMenu) {
+      stateSelectForm === "NO_SELECT" &&
+        setStateSelectForm(listMenu[0].detalle[0].codigo)
+      onListVitalSigns()
+      onListWeightHeight()
+    }
   }, [listMenu])
 
   useEffect(() => {
@@ -354,7 +353,7 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
 
   return (
     <Transition.Root show={stateContext.takeOrder.show} as={Fragment}>
-      <Dialog as="div" className="relative z-10 " onClose={() => {}}>
+      <Dialog as="div" className="relative z-10  " onClose={() => {}}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -379,12 +378,12 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative bg-white rounded-lg overflow-hidden shadow-xl transition-all px-2 pt-5 pb-4  mx-20 w-screen">
+              <Dialog.Panel className="relative bg-white rounded-lg overflow-hidden shadow-xl transition-all px-2 pt-5 pb-4  mx-5 w-screen">
                 <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                   <button
                     type="button"
                     className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    onClick={setTakeOrderContext}
+                    onClick={onCloseTakeOrder}
                   >
                     <span className="sr-only">Close</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -399,26 +398,36 @@ const TakeOrderViewController: React.FC<Props> = (props) => {
                     plan={stateContext.takeOrder.plan}
                     evaluation={stateContext.takeOrder.evaluation}
                   />
-                  <div className="flex flex-row ">
-                    <MenuForm listMenu={listMenu} selectForm={selectFormFromMenu} stateSelectForm={stateSelectForm}/>
-                    <div className="flex-auto bg-gray-100 px-8 py-6">
-                      <div className="flex flex-row">
-                        <div className="flex-auto">
-                          {onChangeForm(stateSelectForm)}
-                        </div>
-                        <div className="pl-8">
-                          <ButtonForm
-                            disabledNew={stateDisabledNew}
-                            disabledSave={stateDisabledSave}
-                            disabledEdit={stateDisabledEdit}
-                            onClickNew={onClickNew}
-                            onClickSave={onClickSave}
-                            onClickEdit={onClickEdit}
-                          />
+                  {isLoadingListMenu ? (
+                    <div className="flex justify-center items-center w-full h-96">
+                      <Spinner />
+                    </div>
+                  ) : (
+                    <div className="flex flex-row">
+                      <MenuForm
+                        listMenu={listMenu}
+                        selectForm={selectFormFromMenu}
+                        stateSelectForm={stateSelectForm}
+                      />
+                      <div className="flex-auto bg-gray-100 px-8 py-6">
+                        <div className="flex flex-row">
+                          <div className="flex-auto">
+                            {onChangeForm(stateSelectForm)}
+                          </div>
+                          <div className="pl-8">
+                            <ButtonForm
+                              disabledNew={stateDisabledNew}
+                              disabledSave={stateDisabledSave}
+                              disabledEdit={stateDisabledEdit}
+                              onClickNew={onClickNew}
+                              onClickSave={onClickSave}
+                              onClickEdit={onClickEdit}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -433,6 +442,7 @@ function mapStateToProps(state: any) {
   return {
     user: state.auth.data,
     listMenu: state.takeOrderListMenu.data,
+    isLoadingListMenu: state.takeOrderListMenu.isLoading,
     listVitalSigns: state.listVitalSigns.data,
     listWeightHeight: state.listWeightHeight.data,
     saveVitalSigns: state.saveVitalSigns.data,

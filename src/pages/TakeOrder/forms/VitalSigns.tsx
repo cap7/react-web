@@ -148,7 +148,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateTemperature}
-              onChange={(e) => setStateTemperature(e.target.value)}
+              onChange={(e) => setStateTemperature(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -166,7 +166,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={statePulse}
-              onChange={(e) => setStatePulse(e.target.value)}
+              onChange={(e) => setStatePulse(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -184,7 +184,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateBreathing}
-              onChange={(e) => setStateBreathing(e.target.value)}
+              onChange={(e) => setStateBreathing(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -204,7 +204,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateSystolicPressure}
-              onChange={(e) => setStateSystolicPressure(e.target.value)}
+              onChange={(e) => setStateSystolicPressure(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -222,7 +222,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateDiastolicPressure}
-              onChange={(e) => setStateDiastolicPressure(e.target.value)}
+              onChange={(e) => setStateDiastolicPressure(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -238,7 +238,7 @@ const VitalSigns: React.FC<Props> = (props) => {
               type="text"
               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md bg-gray-100"
               value={stateHalfPressure}
-              onChange={(e) => setStateHalfPressure(e.target.value)}
+              onChange={(e) => setStateHalfPressure(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={true}
             />
           </div>
@@ -258,7 +258,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateHeartRate}
-              onChange={(e) => setStateHeartRate(e.target.value)}
+              onChange={(e) => setStateHeartRate(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>
@@ -276,7 +276,7 @@ const VitalSigns: React.FC<Props> = (props) => {
                 formDisabled ? "bg-gray-100" : "bg-white"
               }`}
               value={stateSaturation}
-              onChange={(e) => setStateSaturation(e.target.value)}
+              onChange={(e) => setStateSaturation(e.target.value.replace(/[^0-9.]|(?<=\..*)\./g, ''))}
               disabled={formDisabled}
             />
           </div>

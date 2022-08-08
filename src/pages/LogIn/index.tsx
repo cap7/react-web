@@ -3,15 +3,18 @@ import { connect } from "react-redux"
 import { Dispatch } from "redux"
 import { Creators as actionLogIn } from "../../domain/useCases/logInUseCase"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { LockClosedIcon } from "@heroicons/react/solid"
 import { MainContext } from "../../context/MainProvider"
 import { ContextTypes } from "../../context/MainReducer"
 import { useNavigate } from "react-router-dom"
+import { Spinner } from "../../components"
 
 interface Props {
   dispatch: Dispatch
   data: any
   isLoggedIn: boolean
+  isLoading: boolean
+  error: boolean,
+  errorMessage: boolean
 }
 
 type FormLogIn = {
@@ -24,11 +27,10 @@ const LoginViewController: React.FC<Props> = (props) => {
   const { dispatchContext } = useContext(MainContext)
   const navigate = useNavigate()
 
-  const { data, isLoggedIn, dispatch } = props
+  const { data, isLoading, isLoggedIn, error, errorMessage, dispatch } = props
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log("auth",data.codigo)
       dispatchContext({
         type: ContextTypes.auth,
         access: true,
@@ -82,21 +84,23 @@ const LoginViewController: React.FC<Props> = (props) => {
               />
             </div>
           </div>
-
+          
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <LockClosedIcon
-                  className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  aria-hidden="true"
-                />
-              </span>
-              Ingrese
-            </button>
+            {isLoading ? (
+              <div className="w-full flex justify-center">
+                <Spinner />
+              </div>
+            ) : (
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+             
+                Ingrese
+              </button>
+            )}
           </div>
+          {error && <p className="text-red-400">{errorMessage}</p>}
         </form>
       </div>
     </div>
@@ -106,6 +110,9 @@ const LoginViewController: React.FC<Props> = (props) => {
 function mapStateToProps(state: any) {
   return {
     data: state.auth.data,
+    error: state.auth.error,
+    errorMessage: state.auth.errorMessage,
+    isLoading: state.auth.isLoading,
     isLoggedIn: state.auth.isLoggedIn,
   }
 }

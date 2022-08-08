@@ -4,7 +4,8 @@ import { Dispatch } from "redux"
 import { useNavigate } from "react-router-dom"
 import { MainContext } from "../../context/MainProvider"
 import { ContextTypes } from "../../context/MainReducer"
-import { SidebarNav, Input, SelectMenu } from "../../components"
+import {SelectMenu } from "../../components"
+import SidebarNav from "./components/SidebarNav"
 import TableOrder from "./components/TableOrder"
 import TakeOrder from "../TakeOrder"
 import DatePicker from "react-datepicker"
@@ -22,6 +23,7 @@ import Helpers from "../../core/Helper"
 
 interface Props {
   dispatch: Dispatch
+  user: any
   isLoggedIn: boolean
   results: any
   resultsIsLoading: boolean
@@ -69,6 +71,7 @@ type FormSearchOrder = {
 const HomeViewController: React.FC<Props> = (props) => {
   const {
     dispatch,
+    user,
     isLoggedIn,
     results,
     resultsIsLoading,
@@ -238,7 +241,7 @@ const HomeViewController: React.FC<Props> = (props) => {
   return (
     <div className="min-h-full">
       <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100">
-        <SidebarNav onSignOut={onSignOut} />
+        <SidebarNav onSignOut={onSignOut} user={user}/>
       </div>
       <div className="lg:pl-64 flex flex-col">
         <main className="flex-1">
@@ -429,6 +432,7 @@ const HomeViewController: React.FC<Props> = (props) => {
 
 function mapStateToProps(state: any) {
   return {
+    user: state.auth.data,
     isLoggedIn: state.auth.isLoggedIn,
     results: state.listResult.data,
     resultsIsLoading: state.listResult.isLoading,

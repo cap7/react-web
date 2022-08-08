@@ -40,10 +40,24 @@ export default function* execute(action: any): any {
       codUser
     )
 
-    yield put({
-      type: Types.UPDATE_VITAL_SIGNS_SUCCESS,
-      data: response[0],
-    })
+    if (response && response.codigo === "100") {
+      yield put({
+        type: "LIST_VITAL_SIGNS",
+        refresh: true,
+        codOrder: codOrder,
+      })
+      yield put({
+        type: Types.UPDATE_VITAL_SIGNS_SUCCESS,
+        data: response,
+      })
+      return
+    } else {
+      yield put({
+        type: Types.UPDATE_VITAL_SIGNS_FAILURE,
+        error: true,
+      })
+      return
+    }
   } catch (error) {
     yield put({
       type: Types.UPDATE_VITAL_SIGNS_FAILURE,

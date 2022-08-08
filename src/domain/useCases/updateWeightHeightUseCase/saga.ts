@@ -5,7 +5,8 @@ import WeightHeightDataRepository from "../../../data/repositories/WeightHeightD
 
 export default function* execute(action: any): any {
   try {
-    const { refresh,
+    const {
+      refresh,
       codOrder,
       codAnalysis,
       size,
@@ -18,12 +19,14 @@ export default function* execute(action: any): any {
       waistHip,
       nutritionalDiagnosis,
       observations,
-      codUser } = action
+      codUser,
+    } = action
     yield put({ type: Types.UPDATE_WEIGHT_HEIGHT_REQUEST, refresh })
 
     const repository: WeightHeightRepository = new WeightHeightDataRepository()
 
-    const response = yield call(repository.updateWeightHeight,
+    const response = yield call(
+      repository.updateWeightHeight,
       codOrder,
       codAnalysis,
       size,
@@ -36,16 +39,31 @@ export default function* execute(action: any): any {
       waistHip,
       nutritionalDiagnosis,
       observations,
-      codUser)
+      codUser
+    )
 
-    yield put({
-      type: Types.UPDATE_WEIGHT_HEIGHT_SUCCESS,
-      data: response[0],
-    })
+    if (response && response.codigo === "100") {
+      yield put({
+        type: "LIST_WEIGHT_HEIGHT",
+        refresh: true,
+        codOrder: codOrder,
+      })
+      yield put({
+        type: Types.UPDATE_WEIGHT_HEIGHT_SUCCESS,
+        data: response,
+      })
+      return
+    } else {
+      yield put({
+        type: Types.UPDATE_WEIGHT_HEIGHT_FAILURE,
+        error: true,
+      })
+      return
+    }
   } catch (error) {
     yield put({
       type: Types.UPDATE_WEIGHT_HEIGHT_FAILURE,
-      error: true
+      error: true,
     })
   }
 }

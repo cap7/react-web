@@ -14,7 +14,7 @@ export default function* execute(action: any): any {
     
     yield put({
       type: Types.LIST_VITAL_SIGNS_SUCCESS,
-      data: response[0],
+      data: response,
     })
     return
   } catch (error) {

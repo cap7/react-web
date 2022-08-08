@@ -66,7 +66,7 @@ const MessageForm: React.FC<Props> = (props) => {
                       className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       onClick={() => {
                         setShow(false)
-                        listenAfterShowMessage()
+                        
                       }}
                     >
                       <span className="sr-only">Close</span>

@@ -18,6 +18,7 @@ const success = (state: any, action: any) => ({
   ...state,
   data: action.data,
   isLoading: false,
+  succes:true,
   error: null,
 })
 

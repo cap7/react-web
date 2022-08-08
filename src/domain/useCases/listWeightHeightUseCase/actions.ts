@@ -7,6 +7,7 @@ const { Types, Creators } = createActions({
   listWeightHeightRequest: null,
   listWeightHeightSuccess: null,
   listWeightHeightFailure: ['error'],
+  listWeightHeightClear: null,
 });
 
 export { Creators, Types };

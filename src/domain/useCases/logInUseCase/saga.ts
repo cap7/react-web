@@ -19,7 +19,8 @@ export default function* execute(action: any) {
     if (!response) {
       yield put({
         type: Types.LOG_IN_FAILURE,
-        error: "Código y/o contraseña incorrectos.",
+        errorMessage: "Código y/o contraseña incorrectos.",
+        error: true,
       })
       return
     }
@@ -27,7 +28,8 @@ export default function* execute(action: any) {
     if (response && response.respuesta === "1") {
       yield put({
         type: Types.LOG_IN_FAILURE,
-        error: "Código y/o contraseña incorrectos.",
+        errorMessage: "Código y/o contraseña incorrectos.",
+        error: true,
       })
       return
     }
@@ -38,7 +40,8 @@ export default function* execute(action: any) {
   } catch (error) {
     yield put({
       type: Types.LOG_IN_FAILURE,
-      error: "Código y/o contraseña incorrectos.",
+      errorMessage: "Código y/o contraseña incorrectos.",
+      error: true,
     })
   }
 }

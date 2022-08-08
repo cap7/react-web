@@ -1,7 +1,7 @@
 import { AxiosService } from "./client/AxiosHttpClient"
 import { HttpMethod } from "./client/Http.interface"
 import OrderDataStore from "../OrderDataStore"
-
+import Config from "Config"
 export default class OrderDataStoreApi implements OrderDataStore {
   private axiosClient = AxiosService.getInstance()
 
@@ -18,7 +18,7 @@ export default class OrderDataStoreApi implements OrderDataStore {
   ) {
     try {
       const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/ListarOrdenes",
+        `${Config.url_api}/ListarOrdenes`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({
@@ -45,7 +45,7 @@ export default class OrderDataStoreApi implements OrderDataStore {
   async listMenu(codOrder: string) {
     try {
       const response = await this.axiosClient.exchange<any>(
-        "http://137.135.106.184:88/api/Neox/ListarMenu",
+        `${Config.url_api}/ListarMenu`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({

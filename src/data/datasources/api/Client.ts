@@ -1,6 +1,7 @@
 import { AxiosService } from "./client/AxiosHttpClient"
 import { HttpMethod } from "./client/Http.interface"
 import ClientDataStore from "../ClientDataStore"
+import Config from "Config"
 
 export default class ClientDataStoreApi implements ClientDataStore {
   private axiosClient = AxiosService.getInstance()
@@ -8,7 +9,7 @@ export default class ClientDataStoreApi implements ClientDataStore {
   async listClient() {
     try {
       const response = await this.axiosClient.exchange<any>(
-        'http://137.135.106.184:88/api/Neox/ListarClientes',
+        `${Config.url_api}/ListarClientes`,
         {
           method: HttpMethod.Get,
         }

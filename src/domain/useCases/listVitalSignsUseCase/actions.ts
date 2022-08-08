@@ -7,6 +7,7 @@ const { Types, Creators } = createActions({
   listVitalSignsRequest: null,
   listVitalSignsSuccess: null,
   listVitalSignsFailure: ['error'],
+  listVitalSignsClear: null
 });
 
 export { Creators, Types };

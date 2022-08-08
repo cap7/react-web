@@ -1,7 +1,7 @@
 import { AxiosService } from "./client/AxiosHttpClient"
 import { HttpMethod } from "./client/Http.interface"
 import LogInDataStore from "../LogInDataStore"
-
+import Config from "Config"
 
 export default class LogInDataStoreApi implements LogInDataStore {
   private axiosClient = AxiosService.getInstance()
@@ -9,7 +9,7 @@ export default class LogInDataStoreApi implements LogInDataStore {
   async logIn(user: string, password: string) {
     try {
       const response:any = await this.axiosClient.exchange<any>(
-        'http://137.135.106.184:88/api/Neox/ValidarLogin',
+        `${Config.url_api}/ValidarLogin`,
         {
           method: HttpMethod.Post,
           data: JSON.stringify({

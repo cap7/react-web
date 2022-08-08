@@ -10,7 +10,6 @@ interface Props {
 
 const MenuForm: React.FC<Props> = (props) => {
   const { listMenu, selectForm, stateSelectForm } = props
-
   const takeOrderListMenuChild = (submenu: any) => {
     return (
       <ul role="list" className="">
@@ -73,7 +72,7 @@ const MenuForm: React.FC<Props> = (props) => {
             <Disclosure as="div" key={key} defaultOpen={true}>
               {({ open }) => (
                 <Fragment key={key}>
-                  <div className="flow-root px-2 w-64">
+                  <div className="flow-root px-2 w-60">
                     <Disclosure.Button className="w-full">
                       <div className="flex py-2 place-items-center ">
                         <div className="flex w-full justify-start  ">

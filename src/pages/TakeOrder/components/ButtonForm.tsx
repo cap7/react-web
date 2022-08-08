@@ -26,6 +26,7 @@ const ButtonForm: React.FC<Props> = (props) => {
           type="submit"
           className= {`${disabledNew ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' } 'group relative flex w-40 py-2 place-items-center justify-center border border-transparent text-sm font-medium rounded-md text-white`}
           onClick={() => onClickNew()}
+          disabled={disabledNew}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-5">
             <PlusIcon className="h-5 w-5 text-white" aria-hidden="true" />
@@ -38,6 +39,7 @@ const ButtonForm: React.FC<Props> = (props) => {
           type="submit"
           className= {`${disabledSave ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' } 'group relative flex w-40 py-2 place-items-center justify-center border border-transparent text-sm font-medium rounded-md text-white`}
           onClick={() => onClickSave()}
+          disabled={disabledSave}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-5">
             <SaveIcon className="h-5 w-5 text-white" aria-hidden="true" />
@@ -50,6 +52,7 @@ const ButtonForm: React.FC<Props> = (props) => {
           type="submit"
           className= {`${disabledEdit ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' } 'group relative flex w-40 py-2 place-items-center justify-center border border-transparent text-sm font-medium rounded-md text-white`}
           onClick={() => onClickEdit()}
+          disabled={disabledEdit}
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-5">
             <PencilIcon className="h-5 w-5 text-white" aria-hidden="true" />

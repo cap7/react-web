@@ -28,8 +28,11 @@ const failure = (state: any, action: any) => ({
   error: action.error,
 })
 
+const clear = () => INITIAL_STATE;
+
 export default createReducer(INITIAL_STATE, {
   [Types.LIST_WEIGHT_HEIGHT_REQUEST]: request,
   [Types.LIST_WEIGHT_HEIGHT_SUCCESS]: success,
-  [Types.LIST_WEIGHT_HEIGHT_FAILURE]: failure
+  [Types.LIST_WEIGHT_HEIGHT_FAILURE]: failure,
+  [Types.LIST_WEIGHT_HEIGHT_CLEAR]: clear,
 })

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/salud-ocupacional/static/css/main.a3c8f11f.css",
+    "main.js": "/salud-ocupacional/static/js/main.8fe0945e.js",
+    "index.html": "/salud-ocupacional/index.html",
+    "main.a3c8f11f.css.map": "/salud-ocupacional/static/css/main.a3c8f11f.css.map",
+    "main.8fe0945e.js.map": "/salud-ocupacional/static/js/main.8fe0945e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3c8f11f.css",
+    "static/js/main.8fe0945e.js"
+  ]
+}

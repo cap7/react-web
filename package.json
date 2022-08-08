@@ -1,7 +1,7 @@
 {
   "name": "salud-ocupacional",
   "version": "0.1.0",
-  "homepage": "https://cap7.github.io/salud-ocupacional",
+  "homepage": "https://cap7.github.io/salud-ocupacional/",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.6.4",

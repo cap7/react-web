@@ -1,12 +1,15 @@
-# Getting Started with Create React App
+# Pasos para levantar el proyecto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Instalar NODEJS
 
-## Available Scripts
+## 2. Instalar Yarn
 
-In the project directory, you can run:
+## 3. Descargar las fuentes
+## 4. Abrir una terminal desde la carpeta del proyecto y descargar las depedencias con el siguiente comando:
+### yarn
 
-### `npm start`
+## 5.
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
